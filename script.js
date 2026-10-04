@@ -1,11 +1,24 @@
 const bgMusic = document.getElementById("bgMusic");
 
-bgMusic.volume = 0.4;
+bgMusic.volume = 1;
 
-window.addEventListener("load", () => {
-    bgMusic.play().catch(() => {
-        console.log("Autoplay was blocked by the browser.");
-    });
+window.addEventListener("load", function () {
+
+    bgMusic.play()
+        .then(() => {
+            console.log("🎵 Music started automatically");
+        })
+        .catch((error) => {
+            console.log("Autoplay blocked by browser:", error);
+        });
+
+});
+document.addEventListener("click", function startMusic() {
+
+    bgMusic.play();
+
+    document.removeEventListener("click", startMusic);
+
 });
 /* =========================================
    SMOOTH SCROLL
